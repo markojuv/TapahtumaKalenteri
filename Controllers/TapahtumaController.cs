@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -83,12 +84,17 @@ namespace TapahtumaMVC.Controllers
         // POST: Tapahtuma/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Tapahtumat tapahtumat)
         {
             try
-            {
-                // TODO: Add update logic here
-
+            {   
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    var content = new StringContent(JsonConvert.SerializeObject(tapahtumat), UTF8Encoding.UTF8, "application/json");
+                    content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                    var response = client.PutAsync($"https://localhost:44394/api/tapahtuma/{id}", content).Result;
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -119,6 +125,8 @@ namespace TapahtumaMVC.Controllers
                     json = response.Content.ReadAsStringAsync().Result;
                     
                 }
+
+
 
                 return RedirectToAction("Index", "Tapahtuma");
             }
