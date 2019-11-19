@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "Hae";
+}
+
+<h1>Tapahtumahaku</h1>
+
+@using (Html.BeginForm("Tapahtumahaku", "Tapahtuma", FormMethod.Post))
+{
+    <div class="form-group">
+        ID: <br />
+        <input type="number" name="id" /><br />
+    </div>
+    <div class="form-group">
+        Nimi: <br />
+        <input type="text" name="nimi" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Hae" class="btn btn-primary" />
+    </div>
+}

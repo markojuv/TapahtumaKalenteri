@@ -46,6 +46,41 @@ namespace TapahtumaMVC.Controllers
             return View(t);
         }
 
+        public IActionResult Hae()
+        {
+            return View();
+        }
+        
+        public IActionResult Tapahtumahaku(int? id, string nimi)
+        {
+            if (id.HasValue)
+            {
+                //return RedirectToAction("Index", "Home", new { id = id });
+                string json = "";
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Accept.Add(new
+                      MediaTypeWithQualityHeaderValue("application/json"));
+                    var response = client.GetAsync($"https://localhost:44394/api/tapahtuma/{id}").Result;
+                    json = response.Content.ReadAsStringAsync().Result;
+                }
+                Tapahtumat t;
+                t = JsonConvert.DeserializeObject<Tapahtumat>(json);
+                return View(t);
+            }
+            string json2 = "";
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Add(new
+                  MediaTypeWithQualityHeaderValue("application/json"));
+                var response = client.GetAsync($"https://localhost:44394/api/tapahtuma/search/{nimi}").Result;
+                json2 = response.Content.ReadAsStringAsync().Result;
+            }
+
+            List<Tapahtumat> tapahtumat = JsonConvert.DeserializeObject<List<Tapahtumat>>(json2);
+            return View("TapahtumahakuNimellä", tapahtumat);
+        }
+
         // GET: Tapahtuma/Create
         public ActionResult Create()
         {
@@ -114,6 +149,7 @@ namespace TapahtumaMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
+
             try
             {
                 string json = "";
@@ -132,8 +168,9 @@ namespace TapahtumaMVC.Controllers
             }
             catch
             {
+
                 return View();
-            }
+            
         }
     }
 }
