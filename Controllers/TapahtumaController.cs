@@ -31,7 +31,16 @@ namespace TapahtumaMVC.Controllers
         // GET: Tapahtuma/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            string json;
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Add(
+                    new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                var response = client.GetAsync($"https://localhost:44394/api/tapahtuma/{id}").Result;
+                json = response.Content.ReadAsStringAsync().Result;
+            }
+            Tapahtumat t = JsonConvert.DeserializeObject<Tapahtumat>(json);
+            return View(t);
         }
 
         // GET: Tapahtuma/Create
