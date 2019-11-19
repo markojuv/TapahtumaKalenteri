@@ -9,13 +9,21 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
+
     <ProjectReference Include="..\TapahtumaLib\TapahtumaLib.csproj" />
+
+
+    <ProjectReference Include="..\TapahtumaKalenteriLib\TapahtumaLib.csproj" />
+
+
   </ItemGroup>
 
 </Project>
