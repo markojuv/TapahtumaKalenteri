@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -93,7 +94,19 @@ namespace TapahtumaMVC.Controllers
         {
             try
             {
+                EventDBContext db = new EventDBContext();
                 // TODO: Add delete logic here
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Tapahtuma tapahtuma = db.Tapahtumat.Where(s => s.TapahtumaId == id).FirstOrDefault();
+                if (tapahtuma == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(movie);
+
 
                 return RedirectToAction(nameof(Index));
             }
