@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -44,6 +43,41 @@ namespace TapahtumaMVC.Controllers
             }
             Tapahtumat t = JsonConvert.DeserializeObject<Tapahtumat>(json);
             return View(t);
+        }
+
+        public IActionResult Hae()
+        {
+            return View();
+        }
+        
+        public IActionResult Tapahtumahaku(int? id, string nimi)
+        {
+            if (id.HasValue)
+            {
+                //return RedirectToAction("Index", "Home", new { id = id });
+                string json = "";
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Accept.Add(new
+                      MediaTypeWithQualityHeaderValue("application/json"));
+                    var response = client.GetAsync($"https://localhost:44394/api/tapahtuma/{id}").Result;
+                    json = response.Content.ReadAsStringAsync().Result;
+                }
+                Tapahtumat t;
+                t = JsonConvert.DeserializeObject<Tapahtumat>(json);
+                return View(t);
+            }
+            string json2 = "";
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Add(new
+                  MediaTypeWithQualityHeaderValue("application/json"));
+                var response = client.GetAsync($"https://localhost:44394/api/tapahtuma/search/{nimi}").Result;
+                json2 = response.Content.ReadAsStringAsync().Result;
+            }
+
+            List<Tapahtumat> tapahtumat = JsonConvert.DeserializeObject<List<Tapahtumat>>(json2);
+            return View("TapahtumahakuNimellä", tapahtumat);
         }
 
         // GET: Tapahtuma/Create
@@ -109,28 +143,9 @@ namespace TapahtumaMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
-            try
-            {
-                EventDBContext db = new EventDBContext();
-                // TODO: Add delete logic here
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                Tapahtuma tapahtuma = db.Tapahtumat.Where(s => s.TapahtumaId == id).FirstOrDefault();
-                if (tapahtuma == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(movie);
-
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
+            
                 return View();
-            }
+            
         }
     }
 }
