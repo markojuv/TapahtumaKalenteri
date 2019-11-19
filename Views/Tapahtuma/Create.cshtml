@@ -1,0 +1,73 @@
+﻿@model TapahtumaLib.Models.Tapahtumat
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Tapahtumat</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nimi" class="control-label"></label>
+                <input asp-for="Nimi" class="form-control" />
+                <span asp-validation-for="Nimi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sijainti" class="control-label"></label>
+                <input asp-for="Sijainti" class="form-control" />
+                <span asp-validation-for="Sijainti" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Päivämäärä" class="control-label"></label>
+                <input asp-for="Päivämäärä" class="form-control" />
+                <span asp-validation-for="Päivämäärä" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kategoria" class="control-label"></label>
+                <input asp-for="Kategoria" class="form-control" />
+                <span asp-validation-for="Kategoria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hinta" class="control-label"></label>
+                <input asp-for="Hinta" class="form-control" />
+                <span asp-validation-for="Hinta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kuvaus" class="control-label"></label>
+                <input asp-for="Kuvaus" class="form-control" />
+                <span asp-validation-for="Kuvaus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Linkki" class="control-label"></label>
+                <input asp-for="Linkki" class="form-control" />
+                <span asp-validation-for="Linkki" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ikäraja" class="control-label"></label>
+                <input asp-for="Ikäraja" class="form-control" />
+                <span asp-validation-for="Ikäraja" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kuva" class="control-label"></label>
+                <input asp-for="Kuva" class="form-control" />
+                <span asp-validation-for="Kuva" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

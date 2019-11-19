@@ -1,0 +1,83 @@
+﻿@model IEnumerable<TapahtumaLib.Models.Tapahtumat>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nimi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sijainti)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Päivämäärä)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kategoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hinta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kuvaus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Linkki)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ikäraja)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kuva)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nimi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sijainti)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Päivämäärä)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kategoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hinta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kuvaus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Linkki)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ikäraja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kuva)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TapahtumaId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.TapahtumaId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.TapahtumaId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
