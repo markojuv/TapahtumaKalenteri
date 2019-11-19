@@ -9,11 +9,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TapahtumaLib\TapahtumaLib.csproj" />
-    <ProjectReference Include="..\TapahtumaRestAPI\TapahtumaRestAPI.csproj" />
+
+    <ProjectReference Include="..\TapahtumaKalenteriLib\TapahtumaLib.csproj" />
+
   </ItemGroup>
 
 </Project>

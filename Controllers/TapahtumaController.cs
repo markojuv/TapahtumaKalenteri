@@ -24,7 +24,7 @@ namespace TapahtumaMVC.Controllers
             {
                 client.DefaultRequestHeaders.Accept.Add(
                     new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                var response = client.GetAsync($"https://localhost:44394/api/tapahtuma").Result;
+                var response = client.GetAsync($"https://localhost:44394/api/tapahtuma/").Result;
                 json = response.Content.ReadAsStringAsync().Result;
             }
             List<Tapahtumat> tapahtumat = JsonConvert.DeserializeObject<List<Tapahtumat>>(json);
@@ -104,7 +104,7 @@ namespace TapahtumaMVC.Controllers
         }
 
         // GET: Tapahtuma/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete()
         {
             return View();
         }
@@ -112,14 +112,23 @@ namespace TapahtumaMVC.Controllers
         // POST: Tapahtuma/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id)
         {
             try
             {
-                EventDBContext db = new EventDBContext();
-                // TODO: Add delete logic here
+                string json = "";
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Accept.Add(new
+                    MediaTypeWithQualityHeaderValue("application/json"));
+                    var response = client.DeleteAsync($"https://localhost:44394/api/tapahtuma/{id}").Result;
+                    json = response.Content.ReadAsStringAsync().Result;
+                    
+                }
 
-                return RedirectToAction(nameof(Index));
+
+
+                return RedirectToAction("Index", "Tapahtuma");
             }
             catch
             {
