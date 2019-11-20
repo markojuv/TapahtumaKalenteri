@@ -108,6 +108,7 @@ namespace TapahtumaMVC.Controllers
             {
                 return View();
             }
+
         }
 
         // GET: Tapahtuma/Edit/5
@@ -159,7 +160,7 @@ namespace TapahtumaMVC.Controllers
                     MediaTypeWithQualityHeaderValue("application/json"));
                     var response = client.DeleteAsync($"https://localhost:44394/api/tapahtuma/{id}").Result;
                     json = response.Content.ReadAsStringAsync().Result;
-                    
+
                 }
 
 
@@ -170,7 +171,9 @@ namespace TapahtumaMVC.Controllers
             {
 
                 return View();
-            
+            }   
+
         }
+
     }
 }
