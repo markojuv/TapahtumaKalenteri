@@ -18,29 +18,29 @@ namespace TapahtumaMVC.Controllers
             }
         }
 
-        public IActionResult Validate(Kayttajat admin)
-        {
-           using (EventDBContext db = new EventDBContext())
-            {
-                var _admin = db.Kayttajat.Where(s => s.Email == admin.Email);
-                if (_admin.Any())
-                {
-                    if (_admin.Where(s => s.Password == admin.Password).Any())
-                    {
+        //public IActionResult Validate(Kayttajat admin)
+        //{
+        //   using (EventDBContext db = new EventDBContext())
+        //    {
+        //        var _admin = db.Kayttajat.Where(s => s.Email == admin.Email);
+        //        if (_admin.Any())
+        //        {
+        //            if (_admin.Where(s => s.Password == admin.Password).Any())
+        //            {
 
-                        return Json(new { status = true, message = "Login Successful!" });
-                    }
-                    else
-                    {
-                        return Json(new { status = false, message = "Invalid Password!" });
-                    }
-                }
-                else
-                {
-                    return Json(new { status = false, message = "Invalid Email!" });
-                }
-            }
+        //                return Json(new { status = true, message = "Login Successful!" });
+        //            }
+        //            else
+        //            {
+        //                return Json(new { status = false, message = "Invalid Password!" });
+        //            }
+        //        }
+        //        else
+        //        {
+        //            return Json(new { status = false, message = "Invalid Email!" });
+        //        }
+        //    }
             
-        }
+        //}
     }
 }
