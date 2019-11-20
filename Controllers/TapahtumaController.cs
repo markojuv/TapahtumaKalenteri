@@ -174,9 +174,8 @@ namespace TapahtumaMVC.Controllers
 
             }
 
-            }   
 
-
+            }
         }
 
     }
