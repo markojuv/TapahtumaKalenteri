@@ -108,6 +108,7 @@ namespace TapahtumaMVC.Controllers
             {
                 return View();
             }
+
         }
 
         // GET: Tapahtuma/Edit/5
@@ -170,7 +171,12 @@ namespace TapahtumaMVC.Controllers
             {
 
                 return View();
+
+            }
+
+
             }
         }
+
     }
 }
