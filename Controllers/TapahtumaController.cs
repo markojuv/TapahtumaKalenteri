@@ -171,7 +171,11 @@ namespace TapahtumaMVC.Controllers
             {
 
                 return View();
+
+            }
+
             }   
+
 
         }
 
