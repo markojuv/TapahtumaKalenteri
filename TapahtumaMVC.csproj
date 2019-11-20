@@ -21,9 +21,6 @@
     <ProjectReference Include="..\TapahtumaLib\TapahtumaLib.csproj" />
 
 
-    <ProjectReference Include="..\TapahtumaKalenteriLib\TapahtumaLib.csproj" />
-
-
   </ItemGroup>
 
 </Project>
