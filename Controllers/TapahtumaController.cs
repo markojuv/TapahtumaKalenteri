@@ -176,7 +176,16 @@ namespace TapahtumaMVC.Controllers
 
 
         }
-            
+
+        public string Kartta()
+        {
+            using (EventDBContext db = new EventDBContext())
+            {
+                var data = db.Tapahtumat.ToList();
+                return JsonConvert.SerializeObject(data);
+            }
+        }
+
     }
 
 }
