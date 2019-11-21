@@ -43,43 +43,119 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nimi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sijainti)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Päivämäärä)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Kategoria)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hinta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Kuvaus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Linkki)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ikäraja)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Kuva)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.TapahtumaId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.TapahtumaId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TapahtumaId">Delete</a>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nimi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sijainti)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Päivämäärä)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kategoria)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hinta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kuvaus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Linkki)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ikäraja)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kuva)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.TapahtumaId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.TapahtumaId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.TapahtumaId">Delete</a>
 
 
-            </td>
-        </tr>
-}
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+@{
+    ViewData["Title"] = "GPS";
+}
+<div id="map"></div>
+@{string connection = (string)Environment.GetEnvironmentVariable("GoogleURL"); }
+@section Scripts {
+    <script async defer type="text/javascript" src=@connection></script>
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+    <script>
+        var map, infoWindow;
+        var postinro= [];
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: -34.397, lng: 150.644 },
+                zoom: 12
+            });
+            infoWindow = new google.maps.InfoWindow;
+            // Try HTML5 geolocation.
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    infoWindow.setPosition(pos);
+                    infoWindow.setContent('Olet tässä.');
+                    infoWindow.open(map);
+                    map.setCenter(pos);
+                }, function () {
+                    handleLocationError(true, infoWindow, map.getCenter());
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+        }
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(browserHasGeolocation ?
+                'Error: The Geolocation service failed.' :
+                'Error: Your browser doesn\'t support geolocation.');
+            infoWindow.open(map);
+        }
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = fankson;
+         function fankson() {
+            console.dir("jotain tullut".xhr);
+            if (xhr.readyState === 4) {
+                // console.log(xhr.responseText);
+                postinro = JSON.parse(xhr.responseText);
+                console.dir(postinro);
+                for (let a of postinro) {
+                    let myLatLng = { lat: a.Lat, lng: a.Long }
+                    var marker = new google.maps.Marker({
+                        position: myLatLng,
+                        map: map,
+                        //url: linkki,
+                        title: a.Sijainti + ' ' + a.Kategoria + ':' + ' ' + a.Kuvaus,
+                    });
+                    // return marker;
+                }
+            }
+        }
+        function hae() {
+            xhr.open("GET", "https://localhost:44352/Tapahtuma/kartta");
+            xhr.send();
+        }
+        hae();
+    </script>
+}
