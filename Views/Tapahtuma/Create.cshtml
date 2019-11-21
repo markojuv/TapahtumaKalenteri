@@ -54,19 +54,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="Kuva" class="control-label"></label>
-    @using (Html.BeginForm("UploadImage", "LoginRegister", FormMethod.Post, new { @enctype = "multipart/form-data" }))
-    {
-        @*@Html.Hidden("AlbumName", Model.Nimi)*@
-        <span id="UploadStatus" style="font-family:comic sans ms;color:white;margin-left:40px;"></span><br />
-        <input style="margin-left:40px;cursor:pointer;" type="file" name="file" id="file" />
-        <input type="submit" style="margin-left:40px;cursor:pointer;" id="upload" value="Upload" />
-    }
-
-</div>
-@*<div>
-                <input asp-for="Kuva" class="form-control" />
-                <span asp-validation-for="Kuva" class="text-danger"></span>
-            </div>*@
+            </div>
+            @*@using (Html.BeginForm("UploadImage", "LoginRegister", FormMethod.Post, new { @enctype = "multipart/form-data" }))*@
+            @*{*@
+                @*@Html.Hidden("AlbumName", Model.Nimi)*@
+                @*<span id="UploadStatus" style="font-family:comic sans ms;color:white;margin-left:40px;"></span><br />
+                <input style="margin-left:40px;cursor:pointer;" type="file" name="file" id="file" />*@
+                @*<input type="submit" style="margin-left:40px;cursor:pointer;" id="upload" value="Upload" />*@
+            @*}*@
+            <div>
+                    <input asp-for="Kuva" class="form-control" />
+                    <span asp-validation-for="Kuva" class="text-danger"></span>
+                </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

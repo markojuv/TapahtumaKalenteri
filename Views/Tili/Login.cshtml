@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login V12</title>
+    <title>Kirjaudu sisään</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -27,16 +27,14 @@
     <!--===============================================================================================-->
 </head>
 <body>
-
     <div class="limiter">
         <div class="container-login100" style="background-image: url('https://cdn.shortpixel.ai/client/q_glossy,ret_img/../images/img-01.jpg');">
             <div class="wrap-login100 p-t-50 p-b-0">
                 <form class="login100-form validate-form">
                     <div class="login100-form-avatar">
-                        <img src="~/images/avatar-01.jpg" alt="AVATAR">
+                        <img src="~/images/user.png" alt="AVATAR">
                     </div>
-                    <span class="login100-form-title p-t-20 p-b-45">
-                        John Doe
+                    <span class="login100-form-title p-t-20 p-b-45">                       
                     </span>
                     <div class="wrap-input100 validate-input m-b-10" data-validate="Email is required">
                         <input class="input100" type="text" name="email" id="email" placeholder="Email">
@@ -57,8 +55,7 @@
                     </div>
                     <div class="text-center w-full p-t-25 p-b-80">
                         <a href="#" class="txt1">
-                            Forgot Username / Password?
-                        </a>
+                            <a asp-action="Luo">Luo käyttäjätunnus</a>                                                  
                     </div>
                 </form>
             </div>

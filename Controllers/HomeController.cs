@@ -23,7 +23,10 @@ namespace TapahtumaMVC.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            using (EventDBContext db = new EventDBContext())
+            {
+                return View();
+            }
         }
 
         public IActionResult Privacy()
