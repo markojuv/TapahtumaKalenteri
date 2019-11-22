@@ -50,7 +50,7 @@ namespace TapahtumaMVC.Controllers
         {
             return View();
         }
-        
+
         public IActionResult Tapahtumahaku(int? id, string nimi)
         {
             if (id.HasValue)
@@ -114,7 +114,11 @@ namespace TapahtumaMVC.Controllers
         // GET: Tapahtuma/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            using (EventDBContext db = new EventDBContext())
+            {
+                var t = db.Tapahtumat.Where(a => a.TapahtumaId == id).FirstOrDefault();
+                return View(t);
+            }
         }
 
         // POST: Tapahtuma/Edit/5
@@ -123,7 +127,7 @@ namespace TapahtumaMVC.Controllers
         public ActionResult Edit(int id, Tapahtumat tapahtumat)
         {
             try
-            {   
+            {
                 using (var client = new HttpClient())
                 {
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -140,15 +144,19 @@ namespace TapahtumaMVC.Controllers
         }
 
         // GET: Tapahtuma/Delete/5
-        public ActionResult Delete()
+        public ActionResult Delete(int id)
         {
-            return View();
+            using (EventDBContext db = new EventDBContext())
+            {
+                var t = db.Tapahtumat.Where(a => a.TapahtumaId == id).FirstOrDefault();
+                return View(t);
+            }
         }
 
         // POST: Tapahtuma/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id, Tapahtumat tapahtumat)
         {
 
             try

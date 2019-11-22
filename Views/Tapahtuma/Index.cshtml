@@ -1,92 +1,9 @@
 ﻿@model IEnumerable<TapahtumaLib.Models.Tapahtumat>
 
 @{
-    ViewData["Title"] = "Index";
-}
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nimi)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sijainti)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Päivämäärä)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Kategoria)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hinta)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Kuvaus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Linkki)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ikäraja)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Kuva)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nimi)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sijainti)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Päivämäärä)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Kategoria)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Hinta)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Kuvaus)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Linkki)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ikäraja)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Kuva)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.TapahtumaId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.TapahtumaId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.TapahtumaId">Delete</a>
-
-
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-@{
     ViewData["Title"] = "GPS";
 }
+    <p><h1>Tapahtumat</h1><div><a asp-action="Create">Luo uusi</a></div></p>
 <div id="map"></div>
 @{string connection = (string)Environment.GetEnvironmentVariable("GoogleURL"); }
 @section Scripts {
@@ -99,7 +16,7 @@
     </style>
     <script>
         var map, infoWindow;
-        var postinro= [];
+        var postinro = [];
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: -34.397, lng: 150.644 },
@@ -134,7 +51,7 @@
         }
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = fankson;
-         function fankson() {
+        function fankson() {
             console.dir("jotain tullut".xhr);
             if (xhr.readyState === 4) {
                 // console.log(xhr.responseText);
@@ -146,7 +63,7 @@
                         position: myLatLng,
                         map: map,
                         //url: linkki,
-                        title: a.Sijainti + ' ' + a.Kategoria + ':' + ' ' + a.Kuvaus,
+                        title: a.Nimi + ', ' + a.Sijainti + ', ' + a.Kategoria + ':' + ' ' + a.Kuvaus,
                     });
                     // return marker;
                 }
@@ -159,3 +76,84 @@
         hae();
     </script>
 }
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nimi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sijainti)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Päivämäärä)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kategoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hinta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kuvaus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Linkki)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Ikäraja)
+            </th>*@
+            @*<th>
+                @Html.DisplayNameFor(model => model.Kuva)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nimi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sijainti)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Päivämäärä)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kategoria)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hinta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kuvaus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Linkki)                   
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Ikäraja)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kuva)
+                </td>*@
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.TapahtumaId">Muokkaa</a> <br />
+                    <a asp-action="Details" asp-route-id="@item.TapahtumaId">Tiedot</a> <br />
+                    <a asp-action="Delete" asp-route-id="@item.TapahtumaId">Poista</a>
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

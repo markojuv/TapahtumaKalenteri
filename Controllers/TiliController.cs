@@ -14,14 +14,7 @@ namespace TapahtumaMVC.Controllers
 {
     public class TiliController : Controller
     {
-        //public IActionResult Login()
-        //{
-        //    using (EventDBContext db = new EventDBContext())
-        //    {
-        //        return View();
-        //    }
-        //}
-
+        
         // GET: Tapahtuma/Create
         public ActionResult Luo()
         {
