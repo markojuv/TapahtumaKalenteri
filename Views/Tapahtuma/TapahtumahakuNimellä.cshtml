@@ -6,9 +6,6 @@
 
 <h1>Tapahtumahaku nimellä</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -36,9 +33,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Ikäraja)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Kuva)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -69,14 +66,17 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Ikäraja)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Kuva)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.TapahtumaId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.TapahtumaId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TapahtumaId">Delete</a>
-            </td>
+            </td>*@
+        <td>
+            @Html.ActionLink("Muokkaa", "Edit", new { id = item.TapahtumaId }) <br />
+            @Html.ActionLink("Poista", "Delete", new { id = item.TapahtumaId }) <br />
+            <a asp-action="Index">Takaisin listaan</a>
+            @*<a asp-action="Edit" asp-route-id="@item.TapahtumaId">Muokkaa</a> <br />
+            <a asp-action="Details" asp-route-id="@item.TapahtumaId">Tiedot</a> <br />
+            <a asp-action="Delete" asp-route-id="@item.TapahtumaId">Poista</a>*@
+        </td>
         </tr>
 }
     </tbody>

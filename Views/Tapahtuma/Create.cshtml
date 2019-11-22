@@ -4,9 +4,8 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Luo tapahtuma</h1>
 
-<h4>Tapahtumat</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -52,9 +51,9 @@
                 <input asp-for="Ikäraja" class="form-control" />
                 <span asp-validation-for="Ikäraja" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Kuva" class="control-label"></label>
-            </div>
+            </div>*@
             @*@using (Html.BeginForm("UploadImage", "LoginRegister", FormMethod.Post, new { @enctype = "multipart/form-data" }))*@
             @*{*@
                 @*@Html.Hidden("AlbumName", Model.Nimi)*@
@@ -62,19 +61,19 @@
                 <input style="margin-left:40px;cursor:pointer;" type="file" name="file" id="file" />*@
                 @*<input type="submit" style="margin-left:40px;cursor:pointer;" id="upload" value="Upload" />*@
             @*}*@
-            <div>
+            @*<div>
                     <input asp-for="Kuva" class="form-control" />
                     <span asp-validation-for="Kuva" class="text-danger"></span>
-                </div>
+                </div>*@
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Luo" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Takaisin listaan</a>
 </div>
 
 @section Scripts {
